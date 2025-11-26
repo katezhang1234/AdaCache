@@ -507,7 +507,7 @@ class STDiT2(PreTrainedModel):
 
 
 MODELS._module_dict.pop("STDiT2-XL/2", None)
-@MODELS.register_module()
+@MODELS.register_module("STDiT2-XL/2")
 def STDiT2_XL_2(from_pretrained=None, **kwargs):
     if from_pretrained is not None:
         if os.path.isdir(from_pretrained) or os.path.isfile(from_pretrained):
