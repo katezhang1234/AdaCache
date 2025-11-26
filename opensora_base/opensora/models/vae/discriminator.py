@@ -149,6 +149,7 @@ class ResBlockDown(nn.Module):
         return out
 
 
+MODELS._module_dict.pop("NLayerDiscriminator", None)
 @MODELS.register_module()
 class NLayerDiscriminator(nn.Module):
     """Defines a PatchGAN discriminator as in Pix2Pix
@@ -387,6 +388,7 @@ def load_checkpoint_with_inflation(model, ckpt_path):
         load_checkpoint(model, ckpt_path)  # use the default function
 
 
+MODELS._module_dict.pop("DISCRIMINATOR_3D", None)
 @MODELS.register_module("DISCRIMINATOR_3D")
 def DISCRIMINATOR_3D(from_pretrained=None, inflate_from_2d=False, use_pretrained=True, **kwargs):
     model = StyleGANDiscriminatorBlur(**kwargs).apply(xavier_uniform_weight_init)
@@ -403,6 +405,7 @@ def DISCRIMINATOR_3D(from_pretrained=None, inflate_from_2d=False, use_pretrained
     return model
 
 
+MODELS._module_dict.pop("N_Layer_DISCRIMINATOR_3D", None)
 @MODELS.register_module("N_Layer_DISCRIMINATOR_3D")
 def DISCRIMINATOR_3D_N_Layer(from_pretrained=None, inflate_from_2d=False, use_pretrained=True, **kwargs):
     model = NLayerDiscriminator3D(

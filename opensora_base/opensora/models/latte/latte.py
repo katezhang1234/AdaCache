@@ -29,6 +29,7 @@ from opensora_base.opensora.registry import MODELS
 from opensora_base.opensora.utils.ckpt_utils import load_checkpoint
 
 
+MODELS._module_dict.pop("Latte", None)
 @MODELS.register_module()
 class Latte(DiT):
     def forward(self, x, t, y):
@@ -84,6 +85,7 @@ class Latte(DiT):
         return x
 
 
+MODELS._module_dict.pop("Latte-XL/2", None)
 @MODELS.register_module("Latte-XL/2")
 def Latte_XL_2(from_pretrained=None, **kwargs):
     model = Latte(
@@ -98,6 +100,7 @@ def Latte_XL_2(from_pretrained=None, **kwargs):
     return model
 
 
+MODELS._module_dict.pop("Latte-XL/2x2", None)
 @MODELS.register_module("Latte-XL/2x2")
 def Latte_XL_2x2(from_pretrained=None, **kwargs):
     model = Latte(

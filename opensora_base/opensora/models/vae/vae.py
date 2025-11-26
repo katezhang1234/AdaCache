@@ -10,6 +10,8 @@ from opensora_base.opensora.registry import MODELS, build_module
 from opensora_base.opensora.utils.ckpt_utils import load_checkpoint
 
 
+
+MODELS._module_dict.pop("VideoAutoencoderKL", None)
 @MODELS.register_module()
 class VideoAutoencoderKL(nn.Module):
     def __init__(
@@ -88,6 +90,7 @@ class VideoAutoencoderKL(nn.Module):
         return next(self.parameters()).dtype
 
 
+MODELS._module_dict.pop("VideoAutoencoderKLTemporalDecoder", None)
 @MODELS.register_module()
 class VideoAutoencoderKLTemporalDecoder(nn.Module):
     def __init__(self, from_pretrained=None, cache_dir=None, local_files_only=False):
@@ -251,6 +254,7 @@ class VideoAutoencoderPipeline(PreTrainedModel):
         return next(self.parameters()).dtype
 
 
+MODELS._module_dict.pop("OpenSoraVAE-V1-2", None)
 @MODELS.register_module()
 def OpenSoraVAE_V1_2(
     micro_batch_size=4,

@@ -110,6 +110,7 @@ class PixArtBlock(nn.Module):
         return x
 
 
+MODELS._module_dict.pop("PixArt-Sigma", None)
 @MODELS.register_module()
 class PixArt_Sigma(nn.Module):
     """
@@ -334,6 +335,7 @@ class PixArt_Sigma(nn.Module):
         nn.init.constant_(self.final_layer.linear.bias, 0)
 
 
+MODELS._module_dict.pop("PixArt-Sigma-XL/2", None)
 @MODELS.register_module("PixArt-Sigma-XL/2")
 def PixArt_Sigma_XL_2(from_pretrained=None, **kwargs):
     model = PixArt_Sigma(depth=28, hidden_size=1152, patch_size=(1, 2, 2), num_heads=16, **kwargs)

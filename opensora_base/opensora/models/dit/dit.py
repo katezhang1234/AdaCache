@@ -71,6 +71,7 @@ class DiTBlock(nn.Module):
         return x
 
 
+MODELS._module_dict.pop("DiT", None)
 @MODELS.register_module()
 class DiT(nn.Module):
     """
@@ -260,6 +261,7 @@ class DiT(nn.Module):
             nn.init.normal_(self.y_embedder.y_proj.fc2.weight, std=0.02)
 
 
+MODELS._module_dict.pop("DiT-XL/2", None)
 @MODELS.register_module("DiT-XL/2")
 def DiT_XL_2(from_pretrained=None, **kwargs):
     model = DiT(
@@ -274,6 +276,7 @@ def DiT_XL_2(from_pretrained=None, **kwargs):
     return model
 
 
+MODELS._module_dict.pop("DiT-XL/2x2", None)
 @MODELS.register_module("DiT-XL/2x2")
 def DiT_XL_2x2(from_pretrained=None, **kwargs):
     model = DiT(

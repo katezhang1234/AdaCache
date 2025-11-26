@@ -712,6 +712,7 @@ class STDiT3(PreTrainedModel):
         return x
 
 
+MODELS._module_dict.pop("STDiT3-XL/2", None)
 @MODELS.register_module("STDiT3-XL/2")
 def STDiT3_XL_2(from_pretrained=None, **kwargs):
     force_huggingface = kwargs.pop("force_huggingface", False)
@@ -725,6 +726,7 @@ def STDiT3_XL_2(from_pretrained=None, **kwargs):
     return model
 
 
+MODELS._module_dict.pop("STDiT3-3B/2", None)
 @MODELS.register_module("STDiT3-3B/2")
 def STDiT3_3B_2(from_pretrained=None, **kwargs):
     force_huggingface = kwargs.pop("force_huggingface", False)

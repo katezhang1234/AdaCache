@@ -153,6 +153,7 @@ class STDiTBlock(nn.Module):
         return x
 
 
+MODELS._module_dict.pop("STDiT", None)
 @MODELS.register_module()
 class STDiT(nn.Module):
     def __init__(
@@ -430,6 +431,7 @@ class STDiT(nn.Module):
         nn.init.constant_(self.final_layer.linear.bias, 0)
 
 
+MODELS._module_dict.pop("STDiT-XL/2", None)
 @MODELS.register_module("STDiT-XL/2")
 def STDiT_XL_2(from_pretrained=None, **kwargs):
     model = STDiT(depth=28, hidden_size=1152, patch_size=(1, 2, 2), num_heads=16, **kwargs)

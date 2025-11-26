@@ -78,6 +78,7 @@ class FrozenCLIPEmbedder(AbstractEncoder):
         return self(text)
 
 
+MODELS._module_dict.pop("clip", None)
 @MODELS.register_module("clip")
 class ClipEncoder:
     """

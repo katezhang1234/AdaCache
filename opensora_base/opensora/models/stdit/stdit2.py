@@ -215,6 +215,7 @@ class STDiT2Config(PretrainedConfig):
         super().__init__(**kwargs)
 
 
+MODELS._module_dict.pop("STDiT2", None)
 @MODELS.register_module()
 class STDiT2(PreTrainedModel):
     config_class = STDiT2Config
@@ -505,7 +506,8 @@ class STDiT2(PreTrainedModel):
         nn.init.constant_(self.final_layer.linear.bias, 0)
 
 
-@MODELS.register_module("STDiT2-XL/2")
+MODELS._module_dict.pop("STDiT2-XL/2", None)
+@MODELS.register_module()
 def STDiT2_XL_2(from_pretrained=None, **kwargs):
     if from_pretrained is not None:
         if os.path.isdir(from_pretrained) or os.path.isfile(from_pretrained):

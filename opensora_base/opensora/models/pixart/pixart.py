@@ -105,6 +105,7 @@ class PixArtBlock(nn.Module):
         return x
 
 
+MODELS._module_dict.pop("PixArt", None)
 @MODELS.register_module()
 class PixArt(nn.Module):
     """
@@ -315,6 +316,7 @@ class PixArt(nn.Module):
         nn.init.constant_(self.final_layer.linear.bias, 0)
 
 
+MODELS._module_dict.pop("PixArtMS", None)
 @MODELS.register_module()
 class PixArtMS(PixArt):
     def __init__(self, *args, **kwargs):
@@ -381,6 +383,7 @@ class PixArtMS(PixArt):
         return x
 
 
+MODELS._module_dict.pop("PixArt-XL/2", None)
 @MODELS.register_module("PixArt-XL/2")
 def PixArt_XL_2(from_pretrained=None, **kwargs):
     model = PixArt(depth=28, hidden_size=1152, patch_size=(1, 2, 2), num_heads=16, **kwargs)
@@ -389,6 +392,7 @@ def PixArt_XL_2(from_pretrained=None, **kwargs):
     return model
 
 
+MODELS._module_dict.pop("PixArt-1B/2", None)
 @MODELS.register_module("PixArt-1B/2")
 def PixArt_1B_2(from_pretrained=None, **kwargs):
     model = PixArt(depth=28, hidden_size=1872, patch_size=(1, 2, 2), num_heads=26, **kwargs)
@@ -397,6 +401,7 @@ def PixArt_1B_2(from_pretrained=None, **kwargs):
     return model
 
 
+MODELS._module_dict.pop("PixArtMS-XL/2", None)
 @MODELS.register_module("PixArtMS-XL/2")
 def PixArtMS_XL_2(from_pretrained=None, **kwargs):
     model = PixArtMS(depth=28, hidden_size=1152, patch_size=(1, 2, 2), num_heads=16, **kwargs)

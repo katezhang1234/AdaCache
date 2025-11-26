@@ -322,6 +322,7 @@ class Decoder(nn.Module):
         return x
 
 
+MODELS._module_dict.pop("VAE-Temporal", None)
 @MODELS.register_module()
 class VAE_Temporal(nn.Module):
     def __init__(
@@ -418,6 +419,7 @@ class VAE_Temporal(nn.Module):
         return recon_video, posterior, z
 
 
+MODELS._module_dict.pop("VAE_Temporal_SD", None)
 @MODELS.register_module("VAE_Temporal_SD")
 def VAE_Temporal_SD(from_pretrained=None, **kwargs):
     model = VAE_Temporal(

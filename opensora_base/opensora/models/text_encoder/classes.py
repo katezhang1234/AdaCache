@@ -2,7 +2,7 @@ import torch
 
 from opensora_base.opensora.registry import MODELS
 
-
+MODELS._module_dict.pop("classes", None)
 @MODELS.register_module("classes")
 class ClassEncoder:
     def __init__(self, num_classes, model_max_length=None, device="cuda", dtype=torch.float):

@@ -15,6 +15,7 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 IMG_FPS = 120
 
 
+DATASETS._module_dict.pop("VideoTextDataset", None)
 @DATASETS.register_module()
 class VideoTextDataset(torch.utils.data.Dataset):
     """load video according to the csv file.
@@ -112,6 +113,7 @@ class VideoTextDataset(torch.utils.data.Dataset):
         return len(self.data)
 
 
+DATASETS._module_dict.pop("VariableVideoTextDataset", None)
 @DATASETS.register_module()
 class VariableVideoTextDataset(VideoTextDataset):
     def __init__(
@@ -196,6 +198,7 @@ class VariableVideoTextDataset(VideoTextDataset):
             return None
 
 
+DATASETS._module_dict.pop("BatchFeatureDataset", None)
 @DATASETS.register_module()
 class BatchFeatureDataset(torch.utils.data.Dataset):
     """
