@@ -111,6 +111,9 @@ def main():
         .to(device, dtype)
         .eval()
     )
+    # TODO: remove?
+    if cfg.dtype == 'bf16':
+        model = model.to(torch.bfloat16)
     text_encoder.y_embedder = model.y_embedder  # HACK: for classifier-free guidance
 
     # == build scheduler ==
@@ -271,16 +274,34 @@ def main():
                 torch.manual_seed(1024)
                 z = torch.randn(len(batch_prompts), vae.out_channels, *latent_size, device=device, dtype=dtype)
                 masks = apply_mask_strategy(z, refs, ms, loop_i, align=align)
-                samples = scheduler.sample(
-                    model,
-                    text_encoder,
-                    z=z,
-                    prompts=batch_prompts_loop,
-                    device=device,
-                    additional_args=model_args,
-                    progress=verbose >= 2,
-                    mask=masks,
-                )
+                
+                autocast_dtype = None
+                if cfg.dtype == "bf16":
+                    autocast_dtype = torch.float16
+                samples = None
+                if autocast_dtype is not None:
+                    with torch.cuda.amp.autocast(dtype=autocast_dtype):
+                        samples = scheduler.sample(
+                            model,
+                            text_encoder,
+                            z=z,
+                            prompts=batch_prompts_loop,
+                            device=device,
+                            additional_args=model_args,
+                            progress=verbose >= 2,
+                            mask=masks,
+                        )
+                else:
+                    samples = scheduler.sample(
+                            model,
+                            text_encoder,
+                            z=z,
+                            prompts=batch_prompts_loop,
+                            device=device,
+                            additional_args=model_args,
+                            progress=verbose >= 2,
+                            mask=masks,
+                        )
                 samples = vae.decode(samples.to(dtype), num_frames=num_frames)
                 video_clips.append(samples)
 
