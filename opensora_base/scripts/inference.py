@@ -111,9 +111,6 @@ def main():
         .to(device, dtype)
         .eval()
     )
-    # TODO: remove?
-    if cfg.dtype == 'bf16':
-        model = model.to(torch.bfloat16)
     text_encoder.y_embedder = model.y_embedder  # HACK: for classifier-free guidance
 
     # == build scheduler ==
